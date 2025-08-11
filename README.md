@@ -1,16 +1,3 @@
-# // =============================
-// File: Code.gs  (Google Apps Script — SERVER)
-// =============================
-
-/**
- * How to deploy
- * 1) เปิด Google Sheet → Extensions → Apps Script
- * 2) สร้างไฟล์: Code.gs, Index.html, Admin.html, Styles.html แล้ววางแต่ละส่วนให้ตรงชื่อ
- * 3) Run → ensureSheet (Authorize ครั้งแรก)
- * 4) Deploy → Web app (Execute as: Me, Access: Anyone with the link)
- * 5) URL = หน้าแบบฟอร์ม | หน้า Admin เติม ?page=admin
- */
-
 const SHEET_ID = SpreadsheetApp.getActive().getId();
 const SHEET_NAME_REQUESTS = "Requests";
 
