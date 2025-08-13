@@ -1,154 +1,140 @@
-<!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TSM | เข้าสู่ระบบ</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TSM | Login</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <?!= include('styles'); ?>
   <style>
     body{font-family:'Sarabun',sans-serif}
+    .seg{display:flex;border:1px solid #e5e7eb;border-radius:.75rem;overflow:hidden}
+    .seg input{display:none}
+    .seg label{flex:1;padding:.6rem 1rem;text-align:center;cursor:pointer;font-weight:600}
+    .seg input:checked + label{background:#1d4ed8;color:#fff}
   </style>
 </head>
-<body class="min-h-screen bg-gray-50">
-  <!-- Header -->
-  <header class="bg-gradient-to-r from-blue-900 to-blue-500 text-white shadow">
-    <div class="max-w-xl mx-auto px-4 py-5 flex items-center gap-3">
-      <div class="bg-white text-blue-900 font-extrabold rounded-lg px-3 py-1">TSM</div>
-      <div class="leading-tight">
-        <div class="text-xl md:text-2xl font-extrabold">บริษัท ไทยซิน แมนูแฟคเจอริ่ง จำกัด</div>
-        <div class="text-sm md:text-base opacity-90">เข้าสู่ระบบสำหรับผู้ใช้งาน</div>
+<body class="bg-gray-50">
+  <header class="app-header">
+    <div class="flex justify-between items-center">
+      <div class="brand">
+        <div class="logo">TSM</div>
+        <div class="titles">
+          <h1 class="company-name">บริษัท ไทยซิน แมนูแฟคเจอริ่ง จำกัด</h1>
+          <h1 class="page-title">เข้าสู่ระบบ</h1>
+        </div>
       </div>
+      <nav class="nav">
+        <a class="btn" href="?page=index">ไปหน้าแบบฟอร์ม</a>
+        <a class="btn" href="?page=admin">ไปหน้า Admin</a>
+      </nav>
     </div>
   </header>
 
-  <!-- Login Card -->
-  <main class="max-w-xl mx-auto px-4">
-    <div class="bg-white rounded-2xl shadow-xl border border-gray-200 mt-8 p-6">
-      <h1 class="text-xl font-bold mb-4">เข้าสู่ระบบ</h1>
-      <p class="text-sm text-gray-600 mb-6">ระบุอีเมลและรหัสผ่านเพื่อเข้าใช้งานระบบเบิกอุปกรณ์</p>
-
-      <form id="loginForm" class="space-y-4">
-        <div>
-          <label for="email" class="block font-semibold mb-1">อีเมล</label>
-          <input id="email" name="email" type="email" required placeholder="name@taisin.co.th" class="w-full border-2 border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100" />
+  <main class="container">
+    <section class="card" style="max-width:560px;margin-inline:auto;">
+      <div class="form-field">
+        <label>โหมดเข้าสู่ระบบ</label>
+        <div class="seg">
+          <input type="radio" id="mode-user" name="mode" value="user" checked>
+          <label for="mode-user">ผู้ใช้งาน</label>
+          <input type="radio" id="mode-admin" name="mode" value="admin">
+          <label for="mode-admin">Admin</label>
         </div>
-        <div>
-          <label for="password" class="block font-semibold mb-1">รหัสผ่าน</label>
-          <input id="password" name="password" type="password" required placeholder="••••••" class="w-full border-2 border-gray-200 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100" />
-          <div class="mt-2 flex items-center gap-2 text-sm">
-            <input id="showPw" type="checkbox" class="h-4 w-4" />
-            <label for="showPw">แสดงรหัสผ่าน</label>
-          </div>
-        </div>
-        <p id="error" class="hidden text-red-600 text-sm bg-red-50 border border-red-200 rounded-md px-3 py-2"></p>
+      </div>
 
-        <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold px-4 py-2.5 rounded-lg hover:brightness-95">เข้าสู่ระบบ</button>
+      <form id="loginForm" class="mt-4">
+        <div class="form-field">
+          <label id="idLabel">อีเมล (ผู้ใช้งาน)</label>
+          <input id="identity" type="text" placeholder="your.name@taisin.co.th" required>
+        </div>
+        <div class="form-field">
+          <label>รหัสผ่าน</label>
+          <input id="password" type="password" placeholder="••••••" required>
+        </div>
+        <div class="actions" style="margin-top:12px;display:flex;gap:8px">
+          <button class="btn primary" type="submit">เข้าสู่ระบบ</button>
+          <button class="btn" type="reset">ล้างค่า</button>
+        </div>
       </form>
 
-      <div class="text-xs text-gray-500 mt-4">
-        เคล็ดลับ: รหัสผ่านคือ <span class="font-semibold">123456</span> (ภายในองค์กรเท่านั้น)
+      <div class="card-sub" style="margin-top:16px">
+        <div class="text-sm text-gray-700 leading-6">
+          <div class="font-semibold mb-1">สำหรับ Admin</div>
+          <ul class="list-disc pl-6">
+            <li>เลือก <strong>“Admin”</strong> ด้านบน</li>
+            <li>Username: <code>admin</code> หรืออีเมลในรายชื่อที่กำหนด</li>
+            <li>Password: <code>123456</code></li>
+          </ul>
+        </div>
       </div>
-
-      <hr class="my-6" />
-      <div class="text-sm text-gray-600">
-        * รายชื่อที่อนุญาตให้เข้าสู่ระบบ:<br/>
-        hatairat.k@taisin.co.th, jidapa.a@taisin.co.th, thanaphat.n@taisin.co.th, ruangchai.c@taisin.co.th
-      </div>
-    </div>
-
-    <div class="text-center text-gray-500 text-sm my-8">© บริษัท ไทยซิน แมนูแฟคเจอริ่ง จำกัด</div>
+    </section>
   </main>
 
   <script>
-    // ===== Config =====
-    const ALLOWED_EMAILS = [
+    // ====== Config ======
+    const DEFAULT_PASS = '123456';
+    const ADMIN_EMAILS = [
       'hatairat.k@taisin.co.th',
       'jidapa.a@taisin.co.th',
       'thanaphat.n@taisin.co.th',
       'ruangchai.c@taisin.co.th'
-    ];
-    const FIXED_PASSWORD = '123456';
+    ].map(s=>s.toLowerCase());
 
-    // ===== Helpers =====
-    const qs = (s, r=document) => r.querySelector(s);
-    const form = qs('#loginForm');
-    const emailEl = qs('#email');
-    const pwEl = qs('#password');
-    const errEl = qs('#error');
+    // ====== Helpers ======
+    const $ = (s, r=document)=>r.querySelector(s);
 
-    // Toggle show/hide password
-    qs('#showPw').addEventListener('change', (e)=>{
-      pwEl.type = e.target.checked ? 'text' : 'password';
+    function setMode(mode){
+      const id = $('#identity');
+      const lbl = $('#idLabel');
+      if(mode==='admin'){
+        lbl.textContent = 'Username หรืออีเมล (Admin)';
+        id.placeholder = 'admin หรือ your.name@taisin.co.th';
+      } else {
+        lbl.textContent = 'อีเมล (ผู้ใช้งาน)';
+        id.placeholder = 'your.name@taisin.co.th';
+      }
+      id.value = '';
+      $('#password').value = '';
+      id.focus();
+    }
+
+    // init mode switch
+    document.querySelectorAll('input[name="mode"]').forEach(r=>{
+      r.addEventListener('change', e=> setMode(e.target.value));
     });
 
-    // If already logged in, redirect to next/index
-    (function autoRedirectIfLoggedIn(){
-      try {
-        const who = localStorage.getItem('tsm_user_email');
-        if (who && ALLOWED_EMAILS.includes(who)) {
-          const params = new URLSearchParams(location.search);
-          const next = params.get('next') || '?page=index';
-          location.href = next;
-        }
-      } catch(err) { /* ignore */ }
-    })();
-
-    // Handle submit
-    form.addEventListener('submit', (e)=>{
+    // ====== Fake client-side auth (สำหรับเดโม่ / ใช้งานภายใน) ======
+    // หมายเหตุ: วิธีนี้ไม่ปลอดภัยสำหรับงาน Production — แนะนำย้าย logic ไปฝั่ง Apps Script
+    $('#loginForm').addEventListener('submit', (e)=>{
       e.preventDefault();
-      errEl.classList.add('hidden');
-      const email = (emailEl.value||'').trim().toLowerCase();
-      const pass = pwEl.value||'';
+      const mode = document.querySelector('input[name="mode"]:checked').value;
+      const id = $('#identity').value.trim().toLowerCase();
+      const pass = $('#password').value;
 
-      if (!ALLOWED_EMAILS.includes(email) || pass !== FIXED_PASSWORD) {
-        errEl.textContent = 'อีเมลหรือรหัสผ่านไม่ถูกต้อง';
-        errEl.classList.remove('hidden');
+      if(pass !== DEFAULT_PASS){
+        alert('รหัสผ่านไม่ถูกต้อง');
         return;
       }
 
-      // Save session (browser-side)
-      try { localStorage.setItem('tsm_user_email', email); } catch(err) {}
-
-      // Redirect
-      const params = new URLSearchParams(location.search);
-      const next = params.get('next') || '?page=index';
-      location.href = next;
+      if(mode==='admin'){
+        const isAdmin = (id==='admin') || ADMIN_EMAILS.includes(id);
+        if(!isAdmin){
+          alert('บัญชีนี้ไม่มีสิทธิ์ Admin');
+          return;
+        }
+        try{ localStorage.setItem('tsm_auth', JSON.stringify({role:'admin', id:id})); }catch{}
+        // ไปหน้า Admin ของระบบเดิม
+        window.location.href='?page=admin';
+      }else{
+        try{ localStorage.setItem('tsm_auth', JSON.stringify({role:'user', id:id})); }catch{}
+        window.location.href='?page=index';
+      }
     });
+
+    // ตั้งค่าเริ่มต้น
+    setMode('user');
   </script>
-
-  <!--
-  ================== การใช้งานและป้องกันหน้าอื่น ๆ ==================
-  1) สร้างไฟล์นี้ใน Apps Script ชื่อ login.html แล้วเพิ่ม routing ใน doGet(e):
-
-     function doGet(e){
-       var page = (e && e.parameter && e.parameter.page) || 'index';
-       if (page === 'login') return HtmlService.createHtmlOutputFromFile('login');
-       if (page === 'admin') return HtmlService.createHtmlOutputFromFile('admin');
-       return HtmlService.createHtmlOutputFromFile('index');
-     }
-
-  2) อยากให้หน้า index/admin ต้องล็อกอินก่อน ใช้สคริปต์ guard นี้ตอนต้นของไฟล์ code.html:
-
-     <script>
-     (function authGuard(){
-       const ALLOWED_EMAILS = ['hatairat.k@taisin.co.th','jidapa.a@taisin.co.th','thanaphat.n@taisin.co.th','ruangchai.c@taisin.co.th'];
-       try {
-         const who = localStorage.getItem('tsm_user_email');
-         if (!who || !ALLOWED_EMAILS.includes(who)) {
-           const next = location.search && location.search.length ? location.search : '?page=index';
-           location.href = '?page=login&next=' + encodeURIComponent(next);
-         }
-       } catch(err) { location.href='?page=login'; }
-     })();
-     </script>
-
-  3) ปุ่มออกจากระบบ (วางที่ header ของ index/admin หากต้องการ):
-
-     <button onclick="localStorage.removeItem('tsm_user_email'); location.href='?page=login';" class="btn">ออกจากระบบ</button>
-
-  หมายเหตุ: วิธีนี้เป็นการล็อกอินฝั่งเบราว์เซอร์แบบง่าย (ไม่ปลอดภัยสำหรับงานภายนอกองค์กร)
-  ถ้าต้องการความปลอดภัยจริง ควรย้ายไปตรวจสอบบนฝั่งเซิร์ฟเวอร์/Google Account SSO.
-  -->
 </body>
 </html>
+
